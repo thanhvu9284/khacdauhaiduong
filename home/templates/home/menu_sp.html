@@ -1,0 +1,47 @@
+<div class="div_menu">    
+    <div class="sub_menu fl txt-white w-130 {% if 'home' in request.resolver_match.url_name %}menuActive{% endif %}" onclick="location.href='{% url 'home:home' %}'"><div class="p-10">TRANG CHỦ</div></div>
+    <div class="sub_menu fl txt-white w-130 {% if 'about' in request.resolver_match.url_name %}menuActive{% endif %}" onclick="location.href='{% url 'about:about' %}'"><div class="p-10">GIỚI THIỆU</div></div>    
+    <div class="fl txt-white w-130">
+        <div>
+            <div class="sub_menu menu_product {% if 'product' in request.resolver_match.url_name %}menuActive{% endif %}" onclick="location.href='{% url 'product:product' %}'">
+                <div class="pt-10">SẢN PHẨM</div>
+                <div class="submenu_service">
+                    <ul>
+                        {% for item in menu_sanpham %}
+                            <li><a href="{% url 'product:product' %}{{item.id}}">{{item.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class="fl txt-white w-130">
+        <div>
+            <div class="menu_service {% if 'service' in request.resolver_match.url_name %}menuActive{% endif %}">
+                <div class="pt-10">DỊCH VỤ</div>
+                <div class="submenu_service">
+                    <ul>
+                        {% for item in menu_service %}
+                            <li><a href="{% url 'service:service' item.id %}">{{item.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class="sub_menu fl txt-white w-130 {% if 'news' in request.resolver_match.url_name %}menuActive{% endif %}" onclick="location.href='{% url 'news:news' %}'"><div class="p-10">TIN TỨC</div></div>
+    <div class="sub_menu fl txt-white w-130 {% if 'contact' in request.resolver_match.url_name %}menuActive{% endif %}" onclick="location.href='{% url 'contact:contact' %}'"><div class="p-10">LIÊN HỆ</div></div>
+    <div class="fl txt-white w-130">
+        <div class="w-250 h-30 mt-1 ml-100 ">              
+              <form action="{% url 'product:search' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="fl">
+                        <input type="text" name="search" placeholder="Tìm kiếm" class="txt-search bg-red-bold txt-white">
+                    </div>
+                    <div class="fl">                        
+                        <button type="submit" class="btn_search pl-10"/>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>

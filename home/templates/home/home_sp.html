@@ -1,0 +1,8 @@
+{% load static %}
+{% block content_home_sp %}
+    {% if dslist %}                 
+        {% for item in dslist %}
+        {{item.tieude |safe }}
+        {% endfor %}
+    {% endif %}
+{% endblock content_home_sp %}

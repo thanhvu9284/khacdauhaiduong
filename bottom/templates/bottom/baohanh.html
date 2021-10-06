@@ -1,0 +1,18 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="p-10">
+    <div class="service_title">   
+        <div>Bảo hành và đổi trả</div>            
+    </div>       
+</div>
+<div class="txt_content">
+      {% if data_baohanh %}                 
+        {% for item in data_baohanh %}
+          {{item.body |safe }}
+        {% endfor %}
+      {% endif %}
+</div>
+{% endblock content %}

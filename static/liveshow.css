@@ -1,0 +1,51 @@
+img.slide {
+    width: 100%;    
+}
+
+img.slide:not(:first-child) {
+    display: none;
+}
+
+.container1 {
+    width: 100%;    
+    position: relative;
+}
+
+/* 2 button change slide: prev and next */
+.btn-change {
+    height: 30px;
+    position: absolute;
+    top: 50%;
+    display: none;
+}
+
+#next {
+    right: 10px;;
+}
+
+#prev {
+    left: 10px;
+}
+
+/* 4 button corresponding to 4 image */
+.change-img {
+    text-align: center;
+    margin-top: 1rem;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+button {
+    background: rgb(0, 153, 255);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: none;
+}
+
+button.active {
+    background: rgb(253, 60, 2);
+    color: white;
+}

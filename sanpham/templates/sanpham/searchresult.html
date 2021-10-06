@@ -1,0 +1,35 @@
+{% extends 'home/base_sp.html' %}
+{% load sanpham_filter %}
+{% load static %}
+
+{% block content %}
+<div> 
+        <div class="pt-10 pb-10">
+            <div class="service_title">   
+                <div>Kết quả tìm kiếm</div>            
+            </div>       
+        </div>
+        <div class="row m-1">
+                {% for child in contacts %}
+                <div class="col-3 pt-10">
+                    <div class="cl_sanpham" onmouseover="show_ct('nbarrow{{child.id}}')" onmouseout="hide_ct('nbarrow{{child.id}}')" onclick="location.href='{% url 'product:product' %}{{child.nhomsanpham_id}}/{{child.id}}/'">
+                        {{child.tieude }}
+                        <img src="{{child.hinh.url}}" width="100%"/>
+                        <!--<div class="arrow-right" id="nbarrow{{child.id}}">
+                            <span>Chi tiết</span>
+                        </div>-->
+                        <div>
+                            {% if child.gia_chinh > 0 %}
+                                {% if child.gia_khuyenmai > 0 %}<span class="gia_chinh1">{{child.gia_chinh}}</span> <span class="gia_khuyenmai">{{child.gia_khuyenmai}}</span>
+                                {% else %}<span class="gia_chinh">{{child.gia_chinh}}</span>
+                                {% endif %}
+                            {% else %}
+                                <div class="gia_lienhe">Liên hệ</div>    
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+</div>
+{% endblock content %}

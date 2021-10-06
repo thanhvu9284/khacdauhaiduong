@@ -1,0 +1,47 @@
+{% load static %}
+<div style="min-height:100px;background:white;width:100%;text-align:left">
+    <div class="row pt-10">
+        <div class="col-md-3">
+            <div class="pl-20">
+                <img src="{% static 'img/pythonlogo.png' %}" height="80px"/>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-3">
+                    <img src="{% static 'img/shipper.jpg' %}" width="50px"/>
+                </div>
+                <div class="col-9">
+                    <b>Ship dịch vụ COD</b><br>
+                    trên phạm vi toàn quốc
+                </div>
+            </div>            
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-3">
+                    <img src="{% static 'img/phone3.png' %}" width="40px"/>
+                </div>
+                <div class="col-9">
+                    <b>Hotline:          
+                    {% for item in h_hotline %}
+                        {{item.title}}
+                    {% endfor %}</b><br>
+                    Tư vấn miễn phí 24/24
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-3">
+                    <img src="{% static 'img/thanhtoan.png' %}" width="50px"/>
+                </div>
+                <div class="col-9">
+                    <b>Thanh toán</b><br>
+                    khi nhận hàng tại nhà
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

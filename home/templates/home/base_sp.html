@@ -1,0 +1,39 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Khắc dấu Hải Dương</title>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" />        
+    <script src="{% static 'jquery-1.8.3.1.js' %}"></script>
+    <script src="{% static 'jvscript.js' %}"></script>
+  </head>
+<center>
+<body>
+    
+    <div class="body_content">
+      <!-- top -->
+      <div class="positon-fix">
+          {% include 'home/menu.html' %}
+      </div>
+      <!-- noi dung -->
+      <div class="clear">
+        <div class="row">
+          <div class="col-3">
+              {% include 'sanpham/menu_left.html' %}
+          </div>
+          <div class="col-9">
+              {% block content %}{% endblock content %} 
+          </div>
+        </div>
+      </div>
+      <!-- bottom -->
+      {% include 'home/bottom.html' %}
+      <!---->
+    </div>
+</body>
+</center>
+</html>

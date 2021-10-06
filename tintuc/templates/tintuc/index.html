@@ -1,0 +1,45 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="p-10">
+    <div class="service_title">   
+        <div>Tin tức</div>            
+    </div>       
+</div>
+<div class="txt_content_news">
+    <div class="row">
+            {% if contacts %}        
+              {% for item in contacts %}                              
+                <div class="col-6">
+                    <div class="row p-10">
+                        <div class="col-5">
+                            <img src="{{item.hinh.url}}" style="width:200px;height:120px"/>
+                        </div>
+                        <div class="col-7">
+                            <div><a href="{{item.id}}"><b>{{item.tieude }}</b></a></div>
+                            <div class="pt-10">{{item.tomtat}}</div>
+                        </div>
+                    </div>
+                </div>
+              {% endfor %}
+            {% endif %}   
+    </div>
+    <div class="pagination">
+      <div class="step-links">
+          {% if contacts.has_previous %}
+              <a href="?page={{ contacts.previous_page_number }}">Trang trước</a>
+          {% endif %}
+
+          <span class="current">
+              Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+          </span>
+
+          {% if contacts.has_next %}
+              <a href="?page={{ contacts.next_page_number }}">Trang tiếp</a>
+          {% endif %}
+      </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,176 @@
+{% extends 'home/base_sp.html' %}
+{% load sanpham_filter %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'tab/tab.css' %}" type="text/css" />        
+<link rel="stylesheet" href="{% static 'rating/star-rating.css' %}" type="text/css" />
+<script src="{% static 'tab/tab.js' %}"></script>
+<script src="{% static 'rating/star-rating.js' %}"></script>
+<script src="{% static 'tab/jvscript.js' %}"></script>
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+    {% endfor %}
+{% endif %}
+
+<div>
+     {% for item in nhomsanpham %}        
+        <div class="pt-10 pb-10">
+            <div class="service_title">   
+                <div>{{item.name}}</div>            
+            </div>       
+        </div>
+    {% endfor %}
+    {% for child in contacts %}
+        <div class="row">
+            <div class="col-5">
+                <img src="{{child.hinh.url}}" width="100%" id="img_main"/>
+                <div id="img_main_child">
+                    {% for item_hinh in child.id|getChildsImage %}
+                        <img src="{{item_hinh.hinh.url}}" class="chitiet_sp_hinh_nho" id="{{item_hinh.id}}" onclick="show_imgct('img_main',this.id,'{{item_hinh.hinh.url}}')"/>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-7 txt-align-left txt-hight">
+                <div class="product_title">{{child.tieude }}</div>
+                <div>
+                    {% if child.gia_chinh > 0 %}
+                        {% if child.gia_khuyenmai > 0 %}Giá: <span class="gia_chinh1">{{child.gia_chinh}}</span> <span class="gia_khuyenmai">{{child.gia_khuyenmai}}</span>
+                        {% else %}Giá:  <span class="gia_chinh">{{child.gia_chinh}}</span>
+                        {% endif %}
+                    {% else %}
+                        <div class="gia_lienhe">Giá:  Liên hệ</div>    
+                    {% endif %}
+                </div>
+                <div>{{child.tomtat | safe}}</div>
+                <div class="gia_lienhe pt-20">Hotline đặt hàng: {% for item in h_hotline %}{{item.title}}{% endfor %}</div>
+            </div>
+        </div>
+        <div class="pt-10">
+            <div class="w3-row">
+                <a href="javascript:void(0)" onclick="openCity(event, 'London');">
+                <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red">Mô tả</div>
+                </a>
+                <a href="javascript:void(0)" onclick="openCity(event, 'Paris');">
+                    <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Đánh giá ({{ child.id|getCountNhanXet}})</div>
+                </a>
+                <a href="javascript:void(0)" onclick="openCity(event, 'Tokyo');">
+                <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Đặt hàng nhanh</div>
+                </a>
+            </div>
+
+            <div id="London" class="w3-container city txt-align-left" style="display:block">
+                <div class="pt-10">{{child.noidung | safe}}</div>
+            </div>
+
+            <div id="Paris" class="w3-container city txt-align-left" style="display:none">
+                <form action="" method="POST">
+                    {% csrf_token %}         
+                    <div class="pt-10">Chọn số sao đánh giá:</div>
+                    <div class="star-rating">                        
+                        <input type="radio" id="5-stars" name="rating" value="5" onclick="myFunction()"/>
+                        <label for="5-stars" class="star">&#9733;</label>
+                        <input type="radio" id="4-stars" name="rating" value="4" onclick="myFunction()"/>
+                        <label for="4-stars" class="star">&#9733;</label>
+                        <input type="radio" id="3-stars" name="rating" value="3" onclick="myFunction()"/>
+                        <label for="3-stars" class="star">&#9733;</label>
+                        <input type="radio" id="2-stars" name="rating" value="2" onclick="myFunction()"/>
+                        <label for="2-stars" class="star">&#9733;</label>
+                        <input type="radio" id="1-star" name="rating" value="1" onclick="myFunction()"/>
+                        <label for="1-star" class="star">&#9733;</label>                        
+                    </div>                    
+                    <!--<p id="one" onclick="myFunction()">Click me to change my HTML content (innerHTML).</p>-->
+
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="{{ form_nx.ten.id_for_label }}">Họ tên *</label>
+                            <input type="text" class="form-control" name="ten" id="{{form_nx.ten.id_for_label}}" required aria-describedby="helpId" placeholder="">
+                        </div>
+                        <div class="col-6">
+                            <label for="{{ form_nx.email.id_for_label }}">Email *</label>
+                            <input type="text" class="form-control" name="email" id="{{form_nx.email.id_for_label}}" required aria-describedby="helpId" placeholder="">
+                        </div>
+                    </div>                                    
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="{{ form_nx.noidung.id_for_label }}">Nhận xét *</label>
+                            <textarea class="form-control" name="noidung" id="{{ form_nx.noidung.id_for_label }}" required rows="7"></textarea>
+                        </div>                    
+                    </div>
+                    <div class="pt-10">
+                        <button type="submit" name="btn_nhanxet" type="button" class="btn btn-primary">Gởi thông tin</button>
+                    </div>                    
+                </form>
+            </div>
+
+            <div id="Tokyo" class="w3-container city txt-align-left" style="display:none">                
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="pt-20 pb-20">
+                        Quý khách vui lòng điền thông tin đầy đủ và chính xác sau đấy ấn Xác Nhận. Bộ phận CSKH chúng tôi sẽ sớm liên hệ lại với bạn. Xin cảm ơn!
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="{{ form.ten.id_for_label }}">Họ tên *</label>
+                            <input type="text" class="form-control" name="ten" id="{{form.ten.id_for_label}}" required aria-describedby="helpId" placeholder="">
+                        </div>
+                        <div class="col-6">
+                            <label for="{{ form.dienthoai.id_for_label }}">Điện thoại *</label>
+                            <input type="text" class="form-control" name="dienthoai" id="{{form.dienthoai.id_for_label}}" required aria-describedby="helpId" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="{{ form.diachi.id_for_label }}">Địa chỉ nhận hàng *</label>
+                            <input type="text" class="form-control" name="diachi" id="{{form.diachi.id_for_label}}" required aria-describedby="helpId" placeholder="">
+                        </div>                    
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <label for="{{ form.soluong.id_for_label }}">Số lượng *</label>
+                            <input type="number" class="form-control" name="soluong" id="{{form.soluong.id_for_label}}" required aria-describedby="helpId" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="{{ form.noidung.id_for_label }}">Lời nhắn *</label>
+                            <textarea class="form-control" name="noidung" id="{{ form.noidung.id_for_label }}" required rows="7"></textarea>
+                        </div>                    
+                    </div>
+                    <div class="pt-10">
+                        <button type="submit" name="btn_dathang" type="button" class="btn btn-primary">Gởi thông tin</button>
+                    </div>                  
+                </form>
+            </div>            
+        </div>
+        <div class="pt-10 pb-10">
+            <div class="service_title">   
+                <div>Các sản phẩm liên quan</div>            
+            </div>       
+        </div>
+        <div class="row m-1">
+                {% for child in groupproduct %}
+                <div class="col-3 pt-10">
+                    <div class="cl_sanpham" onmouseover="show_ct('nbarrow{{child.id}}')" onmouseout="hide_ct('nbarrow{{child.id}}')" onclick="location.href='{% url 'product:product' %}{{child.nhomsanpham_id}}/{{child.id}}/'">
+                        {{child.tieude }}
+                        <img src="{{child.hinh.url}}" width="100%"/>
+                        <!--<div class="arrow-right" id="nbarrow{{child.id}}">
+                            <span>Chi tiết</span>
+                        </div>-->
+                        <div>
+                            {% if child.gia_chinh > 0 %}
+                                {% if child.gia_khuyenmai > 0 %}<span class="gia_chinh1">{{child.gia_chinh}}</span> <span class="gia_khuyenmai">{{child.gia_khuyenmai}}</span>
+                                {% else %}<span class="gia_chinh">{{child.gia_chinh}}</span>
+                                {% endif %}
+                            {% else %}
+                                <div class="gia_lienhe">Liên hệ</div>    
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+    {% endfor %}        
+</div>
+{% endblock content %}

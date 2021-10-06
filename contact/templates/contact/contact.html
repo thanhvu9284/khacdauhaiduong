@@ -1,0 +1,86 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+    {% endfor %}
+{% endif %}
+<div class="container1">
+    <div class="container11">
+        {% if thongtin_map %}
+            {% for item in thongtin_map %}
+                {{ item.body | safe }}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<div class="p-10">
+    <div class="service_title">   
+        <div>Liên hệ</div>            
+    </div>       
+</div>
+<div class="row">
+    <div class="col-5 text-left">
+        <div class="p-10">
+            {% if thongtin_lienhe %}
+                {% for item in thongtin_lienhe %}
+                    {{ item.body | safe}}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-7 text-left">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="row p-10">
+                <div class="col-3">                    
+                    <label for="{{ form.ten.id_for_label }}">Tên liên hệ *</label>
+                </div>
+                <div class="col-8">                         
+                    <input type="text"
+                        class="form-control" name="ten" id="{{form.ten.id_for_label}}" required aria-describedby="helpId" placeholder="">                    
+                </div>
+            </div>
+            <div class="row p-10">
+                <div class="col-3">                    
+                    <label for="{{ form.dienthoai.id_for_label }}">Số điện thoại *</label>
+                </div>
+                <div class="col-8">                         
+                    <input type="text"
+                        class="form-control" name="dienthoai" id="{{ form.dienthoai.id_for_label }}" required aria-describedby="helpId" placeholder="">                    
+                </div>
+            </div>
+            <div class="row p-10">
+                <div class="col-3">                    
+                    <label for="{{ form.email.id_for_label }}">Email *</label>
+                </div>
+                <div class="col-8">                         
+                    <input type="text"
+                        class="form-control" name="email" id="{{ form.email.id_for_label }}" required aria-describedby="helpId" placeholder="">                    
+                </div>
+            </div>
+            <div class="row p-10">
+                <div class="col-3">                    
+                    <label for="{{ form.noidung.id_for_label }}">Nội dung *</label>
+                </div>
+                <div class="col-8">                         
+                    <textarea class="form-control" name="noidung" id="{{ form.noidung.id_for_label }}" required rows="7"></textarea>                                  
+                </div>
+            </div>
+            <div class="row p-10">
+                <div class="col-3">
+                    
+                </div>
+                <div class="col-8">                         
+                <button type="submit" type="button" class="btn btn-primary">Gởi thông tin</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+

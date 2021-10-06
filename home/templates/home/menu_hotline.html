@@ -1,0 +1,29 @@
+{% load static %}
+<div class="top">
+    <div class="fl m-1">
+        KHẮC DẤU HẢI DƯƠNG
+    </div>    
+    <div class="fr m-1 pr-10 icon-top">
+        <div>
+            <a href="http://url" target="_blank" data-label="Facebook"  rel="noopener noreferrer nofollow" title="Follow on Facebook">
+                <i class="icon-facebook" ><img src="{% static 'img/facebook.png' %}" height="16px"/></i></a>
+            <a href="http://url" target="_blank" rel="noopener noreferrer nofollow" data-label="Instagram" title="Follow on Email">
+                <i class="icon-instagram" ><img src="{% static 'img/email.png' %}" height="20px"/></i></a>
+            <a href="tel:tel:0909 xxx xxx" target="_blank"  data-label="Twitter"  rel="noopener noreferrer nofollow" title="Call us">
+                <i class="icon-twitter" ><img src="{% static 'img/phone1.png' %}" height="16px" class="icon-twitter"/></i></a>
+            <!--<a href="mailto:your@email" data-label="E-mail"  rel="nofollow" title="Send us an email"><i class="icon-envelop" ><img src="{% static 'img/email.png' %}" width="20px"/></i></a>-->            
+        </div>	    
+    </div>
+    <div class="fr m-1 pr-10">
+        |
+    </div>
+    <div class="fr m-1 pr-10">
+        <a href="{% url 'contact:contact' %}"><span class="color-white">Liên hệ</span></a>
+    </div>
+    <div class="fr m-1 pr-10">
+        |
+    </div>
+    <div class="fr m-1 pr-10">
+        <a href="{% url 'about:about' %}"><span class="color-white">Giới thiệu</span></a>
+    </div>
+</div>

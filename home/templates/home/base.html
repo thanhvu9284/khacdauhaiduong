@@ -1,0 +1,123 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Khắc dấu Hải Dương</title>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" />        
+    <script src="{% static 'jquery-1.8.3.1.js' %}"></script>
+    <script src="{% static 'jvscript.js' %}"></script>
+  </head>
+<center>
+<body>
+    
+    <div class="body_content">
+      <!-- top -->
+      <div>
+          {% include 'home/menu.html' %}
+      </div>
+      <!-- noi dung -->
+      <div class="clear">
+        {% block content %}{% endblock content %}        
+      </div>      
+      <!--san pham noi bat-->
+      <div class="clear">
+            <div class="p-10">
+              <div class="cl_title">   
+                <div class="ct_title">Sản phẩm nổi bật</div>
+                <div class="cl_title_arrow"></div>
+              </div>       
+            </div>
+            <div class="row m-1">
+              {% if sp_noibat %}                 
+                  {% for item in sp_noibat %}
+                  <div class="col-md-2">
+                      <div class="cl_sanpham" onmouseover="show_ct('nbarrow{{item.id}}')" onmouseout="hide_ct('nbarrow{{item.id}}')" onclick="location.href='{% url 'product:product' %}{{item.nhomsanpham_id}}/{{item.id}}/'">
+                        {{item.tieude }}
+                        <img src="{{item.hinh.url}}" width="100%"/>
+                        <div>
+                            {% if item.gia_chinh > 0 %}
+                              {% if item.gia_khuyenmai > 0 %}<span class="gia_chinh1">{{item.gia_chinh}}</span> <span class="gia_khuyenmai">{{item.gia_khuyenmai}}</span>
+                              {% else %}<span class="gia_chinh">{{item.gia_chinh}}</span>
+                              {% endif %}
+                            {% else %}
+                                <div class="gia_lienhe">Liên hệ</div>    
+                            {% endif %}
+                        </div>
+                      </div>
+                  </div>
+                  {% endfor %}
+              {% endif %}
+            </div>
+      </div>
+      <!--san pham moi-->
+      <div class="clear">
+            <div class="p-10">
+              <div class="cl_title">   
+                <div class="ct_title">Sản phẩm mới</div>
+                <div class="cl_title_arrow"></div>
+              </div>       
+            </div>
+            <div class="row m-1">
+              {% if sp_moi %}                 
+                  {% for item in sp_moi %}
+                    <div class="col-md-2">
+                        <div class="cl_sanpham" onmouseover="show_ct('marrow{{item.id}}')" onmouseout="hide_ct('marrow{{item.id}}')" onclick="location.href='{% url 'product:product' %}{{item.nhomsanpham_id}}/{{item.id}}/'">
+                          {{item.tieude }}
+                          <img src="{{item.hinh.url}}" width="100%"/>
+                          <div>
+                              {% if item.gia_chinh > 0 %}
+                                {% if item.gia_khuyenmai > 0 %}<span class="gia_chinh1">{{item.gia_chinh}}</span> <span class="gia_khuyenmai">{{item.gia_khuyenmai}}</span>
+                                {% else %}<span class="gia_chinh">{{item.gia_chinh}}</span>
+                                {% endif %}
+                              {% else %}
+                                  <div class="gia_lienhe">Liên hệ</div>    
+                              {% endif %}
+                          </div>
+                        </div>
+                    </div>           
+                  {% endfor %}
+              {% endif %}
+            </div>
+      </div>
+      <!--san pham khuyen mai-->
+      <div class="clear">
+            <div class="p-10">
+              <div class="cl_title">   
+                <div class="ct_title">Sản phẩm khuyến mãi</div>
+                <div class="cl_title_arrow"></div>
+              </div>       
+            </div>
+            <div class="row m-1">
+              {% if sp_khuyenmai %}                 
+                  {% for item in sp_khuyenmai %}
+                    <div class="col-md-2">
+                        <div class="cl_sanpham" onmouseover="show_ct('karrow{{item.id}}')" onmouseout="hide_ct('karrow{{item.id}}')" onclick="location.href='{% url 'product:product' %}{{item.nhomsanpham_id}}/{{item.id}}/'">
+                          {{item.tieude }}
+                          <img src="{{item.hinh.url}}" width="100%"/>
+                          <div>
+                              {% if item.gia_chinh > 0 %}
+                                {% if item.gia_khuyenmai > 0 %}<span class="gia_chinh1">{{item.gia_chinh}}</span> <span class="gia_khuyenmai">{{item.gia_khuyenmai}}</span>
+                                {% else %}<span class="gia_chinh">{{item.gia_chinh}}</span>
+                                {% endif %}
+                              {% else %}
+                                  <div class="gia_lienhe">Liên hệ</div>    
+                              {% endif %}
+                          </div>
+                        </div>
+                    </div>      
+                  {% endfor %}
+              {% endif %}
+            </div>
+      </div>
+      <!---->
+      <!-- bottom -->
+      {% include 'home/bottom.html' %}
+      <!---->
+    </div>
+</body>
+</center>
+</html>

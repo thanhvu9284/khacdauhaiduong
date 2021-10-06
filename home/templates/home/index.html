@@ -1,0 +1,41 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'liveshow.css' %}" type="text/css" />
+<script src="{% static 'liveshow.js' %}"></script>
+
+<div class="container1">
+      <div class="container11">
+        {% if thuvienhinh %}                 
+          {% for item in thuvienhinh %}
+            <img class="slide" src="{{item.hinh.url}}" width="100%" idx="{{ forloop.counter0 }}" alt=""/>
+          {% endfor %}
+        {% endif %}
+
+        <!--<img class="btn-change" id="next" src="{% static 'img/next.png' %}" alt="">
+        <img class="btn-change" id="prev" src="{% static 'img/prev.png' %}" alt="">-->
+
+        <div class="change-img">
+            {% if thuvienhinh %}                 
+              {% for item in thuvienhinh %}
+                {% if forloop.counter0 == 0 %}              
+                  <button class="active" idx="{{ forloop.counter0 }}">{{ forloop.counter }}</button>
+                {% else %}
+                  <button idx="{{ forloop.counter0 }}">{{ forloop.counter }}</button>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+        </div>
+    </div>      
+</div>
+<div class="clear"></div>
+<div class="txt_content">
+      {% if home_content %}                 
+        {% for item in home_content %}
+          {{item.body |safe }}
+        {% endfor %}
+      {% endif %}
+</div>
+{% endblock content %}
