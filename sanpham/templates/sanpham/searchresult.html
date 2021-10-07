@@ -11,9 +11,9 @@
         </div>
         <div class="row m-1">
                 {% for child in contacts %}
-                <div class="col-3 pt-10">
+                <div class="col-md-3 pt-10">
                     <div class="cl_sanpham" onmouseover="show_ct('nbarrow{{child.id}}')" onmouseout="hide_ct('nbarrow{{child.id}}')" onclick="location.href='{% url 'product:product' %}{{child.nhomsanpham_id}}/{{child.id}}/'">
-                        {{child.tieude }}
+                        <div>{{child.tieude }}</div>
                         <img src="{{child.hinh.url}}" width="100%"/>
                         <!--<div class="arrow-right" id="nbarrow{{child.id}}">
                             <span>Chi tiết</span>

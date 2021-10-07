@@ -2,9 +2,8 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from dichvu.models import DichVu,NhomDichVu
 
-def index(request, id):
-    tintuc = DichVu.objects.filter(nhomdichvu=id).order_by('-ngaynhap')
-    #tintuc = DichVu.objects.all().order_by('-ngaynhap')
+def indexAll(request):
+    tintuc = DichVu.objects.all().order_by('-ngaynhap')  
     paginator = Paginator(tintuc, 10)
     page_number = request.GET.get("page")
     try:
@@ -17,7 +16,28 @@ def index(request, id):
         contacts = paginator.page(paginator.num_pages)
     
     context = {
-        'contacts' : contacts
+        'contacts' : contacts,
+    }
+        
+    return render(request, 'dichvu/groupservice.html', context)
+
+def index(request, id):
+    tintuc = DichVu.objects.filter(nhomdichvu=id).order_by('-ngaynhap')
+    nhomdichvu = NhomDichVu.objects.filter(id=id)
+    paginator = Paginator(tintuc, 10)
+    page_number = request.GET.get("page")
+    try:
+        contacts = paginator.page(page_number)
+    except PageNotAnInteger:
+        # Nếu page_number không thuộc kiểu integer, trả về page đầu tiên
+        contacts = paginator.page(1)
+    except EmptyPage:
+        # Nếu page không có item nào, trả về page cuối cùng
+        contacts = paginator.page(paginator.num_pages)
+    
+    context = {
+        'contacts' : contacts,
+        'nhomdichvu' : nhomdichvu
     }
         
     return render(request, 'dichvu/index.html', context)

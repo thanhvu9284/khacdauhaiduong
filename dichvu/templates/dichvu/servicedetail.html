@@ -6,14 +6,14 @@
 <div class="txt_content_news">
     <div class="service_title">Dịch vụ - {% for item in nhomdichvu %}{{item.name}}{% endfor %}</div>
     <div class="row">        
-        <div class="col-8">
+        <div class="col-md-8">
             {% if dichvu %}        
               {% for item in dichvu %}
                 <div class="row pt-10">
-                  <div class="col-4">
-                      <img src="{{item.hinh.url}}" style="width:200px;height:120px"/>
+                  <div class="col-md-4">
+                      <img src="{{item.hinh.url}}" class="img_service"/>
                   </div>
-                  <div class="col-8">
+                  <div class="col-md-8">
                       <div><b>{{item.tieude }}</b></div>
                       <div class="pt-10">{{item.tomtat}}</div>                      
                   </div>                                    
@@ -24,7 +24,7 @@
               {% endfor %}
             {% endif %}
         </div>
-        <div class="col-4">
+        <div class="col-md-4">
             <div class="service_title_right">Các dịch vụ khác</div>
             {% if alldichvu %}        
               {% for item in alldichvu %}

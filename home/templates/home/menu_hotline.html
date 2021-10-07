@@ -1,7 +1,21 @@
 {% load static %}
 <div class="top">
+    
+    <link rel="stylesheet" href="{% static '/menumobile/menu.css' %}" type="text/css" />
+    <script src="{% static '/menumobile/menu.js' %}"></script>
+
     <div class="fl m-1">
-        KHẮC DẤU HẢI DƯƠNG
+        <div class="topnav" id="myTopnav">                
+        <a href="javascript:void(0);" style="font-size:15px;" class="clicon" onclick="myFunction()">&#9776;</a> 
+        <a class="pt-30">
+        <a href="{% url 'home:home' %}">Trang chủ</a>
+        <a href="{% url 'about:about' %}">Giới thiệu</a>
+        <a href="{% url 'product:product' %}">Sản phẩm</a>
+        <a href="{% url 'service:groupservice' %}">Dịch vụ</a>
+        <a href="{% url 'news:news' %}">Tin tức</a>
+        <a href="{% url 'contact:contact' %}">Liên hệ</a>
+    </div>
+        <div class="khacdauhaiduong">KHẮC DẤU HẢI DƯƠNG</div>
     </div>    
     <div class="fr m-1 pr-10 icon-top">
         <div>

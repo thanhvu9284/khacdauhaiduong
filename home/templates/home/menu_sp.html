@@ -17,7 +17,7 @@
     </div>
     <div class="fl txt-white w-130">
         <div>
-            <div class="menu_service {% if 'service' in request.resolver_match.url_name %}menuActive{% endif %}">
+            <div class="sub_menu menu_service {% if 'service' in request.resolver_match.url_name %}menuActive{% endif %}" onclick="location.href='{% url 'service:groupservice' %}'">
                 <div class="pt-10">DỊCH VỤ</div>
                 <div class="submenu_service">
                     <ul>
@@ -31,12 +31,12 @@
     </div>
     <div class="sub_menu fl txt-white w-130 {% if 'news' in request.resolver_match.url_name %}menuActive{% endif %}" onclick="location.href='{% url 'news:news' %}'"><div class="p-10">TIN TỨC</div></div>
     <div class="sub_menu fl txt-white w-130 {% if 'contact' in request.resolver_match.url_name %}menuActive{% endif %}" onclick="location.href='{% url 'contact:contact' %}'"><div class="p-10">LIÊN HỆ</div></div>
-    <div class="fl txt-white w-130">
-        <div class="w-250 h-30 mt-1 ml-100 ">              
+    <div class="sub_menu_search fl txt-white">
+        <div class="h-30 mt-1 ml-100 ">              
               <form action="{% url 'product:search' %}" method="POST">
                     {% csrf_token %}
                     <div class="fl">
-                        <input type="text" name="search" placeholder="Tìm kiếm" class="txt-search bg-red-bold txt-white">
+                        <input type="text" name="search" placeholder="Tìm kiếm" class="txt-search bg-red-bold txt-white">                        
                     </div>
                     <div class="fl">                        
                         <button type="submit" class="btn_search pl-10"/>

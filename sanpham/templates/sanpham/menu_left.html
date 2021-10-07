@@ -1,4 +1,4 @@
-<div>    
+<div class="menu_left">    
     <div class="p-10">
         <div class="service_title">   
             <div>Sản phẩm nổi bật</div>            
@@ -11,7 +11,7 @@
                   {% for item in sp_noibat_left %}
                   <div class="col-10">
                       <div class="cl_sanpham" onmouseover="show_ct('lnbarrow{{item.id}}')" onmouseout="hide_ct('lnbarrow{{item.id}}')" onclick="location.href='{% url 'product:product' %}{{item.nhomsanpham_id}}/{{item.id}}/'">
-                        {{item.tieude }}
+                        <div>{{child.tieude }}</div>
                         <img src="{{item.hinh.url}}" width="100%"/>
                         <!--<div class="arrow-right" id="lnbarrow{{item.id}}">
                           <span>Chi tiết</span>
