@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-nez#l&)o4^qvcfv^1njryzxx@clha30xh=wzu8++^jr66es*_q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-#ALLOWED_HOSTS =  ['127.0.0.1','https://khacdauhaiduong.herokuapp.com/']
+ALLOWED_HOSTS =  ['https://khacdauhaiduong.herokuapp.com/','127.0.0.1']
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
@@ -133,7 +133,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
  
  
 MEDIA_URL = '/media/'
