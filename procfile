@@ -1,1 +1,1 @@
-web: gunicorn khacdauhaiduong.wsgi
+web: gunicorn khacdauhaiduong.wsgi --log-file
