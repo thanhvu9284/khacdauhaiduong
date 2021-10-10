@@ -1,5 +1,5 @@
 {% extends 'home/base.html' %}
-
+{% load dichvu_filter %}
 {% load static %}
 
 {% block content %}
@@ -30,7 +30,11 @@
               {% for item in alldichvu %}
                 <div class="p-10">
                     <img src="{{item.hinh.url}}" style="width:150px;height:80px;padding:5px" align="left"/>
-                    <div><a href="{% url 'service:service' item.id %}{{item.id}}"><b>{{item.tieude }}</b></a></div>
+                    <div>
+                      {% for nsp in item.nhomdichvu_id|getSlugNhomDichVu %}
+                        <a href="{% url 'service:service' nsp.slug%}{{item.slug}}"><b>{{item.tieude }}</b></a>
+                      {% endfor %}                      
+                    </div>
                     <div class="pt-10">{{item.tomtat}}</div>
                 </div>
               {% endfor %}

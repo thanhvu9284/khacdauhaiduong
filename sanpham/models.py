@@ -3,12 +3,18 @@ from ckeditor.fields import RichTextField
 from django.utils import timezone
 from django.template.defaultfilters import truncatechars
 from django.utils.safestring import mark_safe
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 class NhomSanPham(models.Model):
     """A model of a rock band."""    
     name = models.CharField("Nhóm sản phẩm",max_length=200)
+    slug = models.SlugField(('slug'), max_length=200, blank=True,editable=False)
     
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(NhomSanPham, self).save(*args, **kwargs)
+        
     def __str__(self) -> str:
         return self.name
     
@@ -20,6 +26,7 @@ class SanPham(models.Model):
     nhomsanpham = models.ForeignKey("NhomSanPham",related_name='children',on_delete=models.CASCADE)
     #nhomsanpham = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True, related_name="nhomsanpham")
     tieude = models.CharField("Tên sản phẩm", max_length=500)
+    slug = models.SlugField(('slug'), max_length=500, blank=True,editable=False)
     tomtat = models.TextField("Tóm tắt",max_length=1000)
     noidung = RichTextField("Nội dung",blank=True,null=True)
     gia_chinh = models.DecimalField("Giá chinh",max_digits=10,decimal_places = 0,blank=True,null=True)
@@ -30,6 +37,10 @@ class SanPham(models.Model):
     hinh = models.FileField("Hình đại diện",blank=True,null=True,upload_to="images/")
     ngaynhap = models.DateTimeField("Ngày nhập",default=timezone.now)   
     
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.tieude)
+        super(SanPham, self).save(*args, **kwargs)
+        
     def __str__(self) -> str:
         return self.tieude
        

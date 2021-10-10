@@ -8,7 +8,7 @@
                 <div class="submenu_service">
                     <ul>
                         {% for item in menu_sanpham %}
-                            <li><a href="{% url 'product:product' %}{{item.id}}">{{item.name}}</a></li>
+                            <li><a href="{% url 'product:product' %}{{item.slug}}">{{item.name}}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -22,7 +22,7 @@
                 <div class="submenu_service">
                     <ul>
                         {% for item in menu_service %}
-                            <li><a href="{% url 'service:service' item.id %}">{{item.name}}</a></li>
+                            <li><a href="{% url 'service:service' item.slug %}">{{item.name}}</a></li>
                         {% endfor %}
                     </ul>
                 </div>

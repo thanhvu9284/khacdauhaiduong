@@ -1,3 +1,4 @@
+from django.db import connection
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from dichvu.models import DichVu,NhomDichVu
@@ -21,9 +22,10 @@ def indexAll(request):
         
     return render(request, 'dichvu/groupservice.html', context)
 
-def index(request, id):
-    tintuc = DichVu.objects.filter(nhomdichvu=id).order_by('-ngaynhap')
-    nhomdichvu = NhomDichVu.objects.filter(id=id)
+def index(request, slug):    
+    nhomdichvu = NhomDichVu.objects.filter(slug=slug)
+    tintuc = DichVu.objects.filter(nhomdichvu__slug=slug).order_by('-ngaynhap')
+
     paginator = Paginator(tintuc, 10)
     page_number = request.GET.get("page")
     try:
@@ -42,9 +44,9 @@ def index(request, id):
         
     return render(request, 'dichvu/index.html', context)
 
-def indexDetail(request, idn, id):
-    nhomdichvu = NhomDichVu.objects.filter(id=idn)
-    dichvu = DichVu.objects.filter(id=id)
+def indexDetail(request, slugn, slug):
+    nhomdichvu = NhomDichVu.objects.filter(slug=slugn)
+    dichvu = DichVu.objects.filter(slug=slug)
     alldichvu = DichVu.objects.all()
 
     context = {

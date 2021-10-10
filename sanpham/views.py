@@ -9,9 +9,9 @@ def index(request):
     
     return render(request, 'sanpham/index.html', {'nhomsanpham': nhomsanpham} )
 
-def GroupProduct(request, id):    
-    nhomsanpham =  NhomSanPham.objects.filter(id=id)
-    contacts = SanPham.objects.all().filter(nhomsanpham=id)
+def GroupProduct(request, slug):    
+    nhomsanpham =  NhomSanPham.objects.filter(slug=slug)
+    contacts = SanPham.objects.all().filter(nhomsanpham__slug=slug)
     context = {
         'nhomsanpham' : nhomsanpham,
         'contacts' : contacts,        
@@ -19,7 +19,7 @@ def GroupProduct(request, id):
     
     return render(request, 'sanpham/groupproduct.html', context)
 
-def DetailProduct(request,idn,id):
+def DetailProduct(request,slugn,slug):
     if request.method == 'POST':
         if 'btn_nhanxet' in request.POST:
             f = NhanXet_Form(request.POST)           
@@ -49,9 +49,9 @@ def DetailProduct(request,idn,id):
                 messages.success(request, result)          
                 return redirect(request.path)
         
-    nhomsanpham = NhomSanPham.objects.all().filter(id=idn)
-    groupproduct = SanPham.objects.filter(nhomsanpham__id=idn).exclude(id=id).order_by('tieude')
-    contacts = SanPham.objects.all().filter(id=id)
+    nhomsanpham = NhomSanPham.objects.all().filter(slug=slugn)
+    groupproduct = SanPham.objects.filter(nhomsanpham__slug=slugn).exclude(slug=slug).order_by('tieude')
+    contacts = SanPham.objects.all().filter(slug=slug)
     cf = DathangSanPham_Form
     ct_nx = NhanXet_Form
     context = {

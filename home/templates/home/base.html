@@ -1,4 +1,5 @@
 {% load static %}
+{% load sanpham_filter %}
 
 <!doctype html>
 <html lang="en">
@@ -35,7 +36,7 @@
               {% if sp_noibat %}                 
                   {% for item in sp_noibat %}
                   <div class="col-md-2">
-                      <div class="cl_sanpham" onmouseover="show_ct('nbarrow{{item.id}}')" onmouseout="hide_ct('nbarrow{{item.id}}')" onclick="location.href='{% url 'product:product' %}{{item.nhomsanpham_id}}/{{item.id}}/'">
+                      <div class="cl_sanpham" onmouseover="show_ct('nbarrow{{item.id}}')" onmouseout="hide_ct('nbarrow{{item.id}}')" onclick="location.href='{% url 'product:product' %}{% for nsp in item.nhomsanpham_id|getSlugNhomSanPham %}{{nsp.slug}}{% endfor %}/{{item.slug}}/'">
                         {{item.tieude }}
                         <img src="{{item.hinh.url}}" width="100%"/>
                         <div>
@@ -65,7 +66,7 @@
               {% if sp_moi %}                 
                   {% for item in sp_moi %}
                     <div class="col-md-2">
-                        <div class="cl_sanpham" onmouseover="show_ct('marrow{{item.id}}')" onmouseout="hide_ct('marrow{{item.id}}')" onclick="location.href='{% url 'product:product' %}{{item.nhomsanpham_id}}/{{item.id}}/'">
+                        <div class="cl_sanpham" onmouseover="show_ct('marrow{{item.id}}')" onmouseout="hide_ct('marrow{{item.id}}')" onclick="location.href='{% url 'product:product' %}{% for nsp in item.nhomsanpham_id|getSlugNhomSanPham %}{{nsp.slug}}{% endfor %}/{{item.slug}}/'">
                           {{item.tieude }}
                           <img src="{{item.hinh.url}}" width="100%"/>
                           <div>
@@ -95,7 +96,7 @@
               {% if sp_khuyenmai %}                 
                   {% for item in sp_khuyenmai %}
                     <div class="col-md-2">
-                        <div class="cl_sanpham" onmouseover="show_ct('karrow{{item.id}}')" onmouseout="hide_ct('karrow{{item.id}}')" onclick="location.href='{% url 'product:product' %}{{item.nhomsanpham_id}}/{{item.id}}/'">
+                        <div class="cl_sanpham" onmouseover="show_ct('karrow{{item.id}}')" onmouseout="hide_ct('karrow{{item.id}}')" onclick="location.href='{% url 'product:product' %}{% for nsp in item.nhomsanpham_id|getSlugNhomSanPham %}{{nsp.slug}}{% endfor %}/{{item.slug}}/'">
                           {{item.tieude }}
                           <img src="{{item.hinh.url}}" width="100%"/>
                           <div>

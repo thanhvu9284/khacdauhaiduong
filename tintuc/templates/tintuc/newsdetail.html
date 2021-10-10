@@ -30,7 +30,7 @@
               {% for item in newsall %}
                 <div class="p-10">
                     <img src="{{item.hinh.url}}" style="width:150px;height:80px;padding:5px" align="left"/>
-                    <div><a href="{% url 'news:news' %}{{item.id}}"><b>{{item.tieude }}</b></a></div>
+                    <div><a href="{% url 'news:news' %}{{item.slug}}"><b>{{item.tieude }}</b></a></div>
                     <div class="pt-10">{{item.tomtat}}</div>
                 </div>
               {% endfor %}

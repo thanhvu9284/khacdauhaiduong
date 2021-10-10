@@ -1,5 +1,5 @@
 from django import template
-from sanpham.models import SanPham,SanPhamHinh,NhanXetSanPhamModel
+from sanpham.models import NhomSanPham, SanPham,SanPhamHinh,NhanXetSanPhamModel
 
 register = template.Library()
 
@@ -14,3 +14,7 @@ def getChildsImage(id_sanpham):
 @register.filter
 def getCountNhanXet(id_sanpham):
 	return NhanXetSanPhamModel.objects.filter(sanpham_id=id_sanpham).count()
+
+@register.filter
+def getSlugNhomSanPham(id_nhom):
+	return NhomSanPham.objects.filter(id=id_nhom)

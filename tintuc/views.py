@@ -21,9 +21,9 @@ def index(request):
         
     return render(request, 'tintuc/index.html', context)
 
-def detailNews(request, id):
-    newsall = tintucForm.objects.exclude(id=id).order_by('-ngaynhap')[:10]
-    contacts = tintucForm.objects.all().filter(id=id)
+def detailNews(request, slug):
+    newsall = tintucForm.objects.exclude(slug=slug).order_by('-ngaynhap')[:10]
+    contacts = tintucForm.objects.all().filter(slug=slug)
     context = {
         'contacts' : contacts,
         'newsall' : newsall
