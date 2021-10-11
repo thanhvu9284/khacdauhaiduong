@@ -1,1 +1,1 @@
-web: gunicorn khacdauhaiduong:khacdauhaiduong
+web:gunicorn khacdauhaiduong:khacdauhaiduong
